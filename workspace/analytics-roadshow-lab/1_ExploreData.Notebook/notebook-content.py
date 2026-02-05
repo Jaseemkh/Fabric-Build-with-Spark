@@ -99,7 +99,7 @@
 # ### The Target Schema
 # By the end of the lab, you'll understand some basic concepts and then see the outcome of a mature data engineering pipeline:
 # 
-# ![McMillian Industrial Group Silver Schema](https://github.com/microsoft/fabric-analytics-roadshow-lab/blob/initial-version-prep/assets/images/spark/silver-erd.png?raw=true)
+# ![McMillian Industrial Group Silver Schema](https://github.com/Jaseemkh/Fabric-Build-with-Spark/blob/working-br/assets/images/spark/silver-erd.png?raw=true)
 # 
 # Let's get started!
 
