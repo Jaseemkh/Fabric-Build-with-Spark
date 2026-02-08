@@ -1,0 +1,94 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build-scala:
+    name: Build Scala Application
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
+    
+    - name: Build with Maven
+      run: mvn clean package -DskipTests
+    
+    - name: Run tests
+      run: mvn test
+    
+    - name: Upload JAR artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: fabric-spark-application
+        path: target/*.jar
+        retention-days: 5
+  
+  test-python:
+    name: Test Python Application
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.9', '3.10']
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Lint with flake8
+      run: |
+        pip install flake8
+        # Stop the build if there are Python syntax errors or undefined names
+        flake8 src/main/python --count --select=E9,F63,F7,F82 --show-source --statistics
+        # Exit-zero treats all errors as warnings
+        flake8 src/main/python --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+      continue-on-error: true
+    
+    - name: Test Python application
+      run: |
+        python src/main/python/fabric_spark/data_processing_app.py data/sample_data.csv output/test_output
+  
+  validate-structure:
+    name: Validate Project Structure
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Check required files
+      run: |
+        test -f pom.xml || exit 1
+        test -f README.md || exit 1
+        test -f LICENSE || exit 1
+        test -f .gitignore || exit 1
+        test -d src/main/scala || exit 1
+        test -d src/main/python || exit 1
+        test -d scripts || exit 1
+        echo "All required files and directories exist"
+    
+    - name: Check script permissions
+      run: |
+        test -x scripts/build.sh || exit 1
+        test -x scripts/run.sh || exit 1
+        test -x scripts/run_python.sh || exit 1
+        echo "All scripts are executable"

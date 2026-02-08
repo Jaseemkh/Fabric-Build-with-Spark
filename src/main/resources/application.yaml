@@ -1,0 +1,39 @@
+# Application Configuration
+app:
+  name: "Fabric Spark Application"
+  version: "1.0.0"
+
+# Spark Configuration
+spark:
+  app_name: "Fabric Data Engineering with Spark"
+  master: "local[*]"
+  config:
+    spark.sql.shuffle.partitions: 4
+    spark.sql.adaptive.enabled: true
+    spark.sql.adaptive.coalescePartitions.enabled: true
+    spark.driver.memory: "2g"
+    spark.executor.memory: "2g"
+
+# Data Sources
+data_sources:
+  input:
+    format: "csv"
+    path: "data/sample_data.csv"
+    options:
+      header: true
+      inferSchema: true
+  output:
+    format: "parquet"
+    path: "output/processed_data"
+    mode: "overwrite"
+
+# Processing Configuration
+processing:
+  enable_data_validation: true
+  enable_data_quality_checks: true
+  enable_deduplication: false
+  
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
