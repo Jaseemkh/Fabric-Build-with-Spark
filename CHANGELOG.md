@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MIT License
 - Requirements file for Python dependencies
 
+### Security
+- Updated Apache Spark to version 3.3.3 in Maven (from 3.3.0) to fix CVE-2023-32007 (Improper Privilege Management vulnerability)
+- Updated PySpark to version 3.3.3 in requirements.txt (from 3.3.0) to fix security vulnerability
+
 ### Features
 - Read data from CSV files
 - Data cleansing and transformation

@@ -16,9 +16,9 @@ A comprehensive Apache Spark application designed for data engineering workloads
 
 - Java 11 or higher
 - Apache Maven 3.6+ (for Scala/Java version)
-- Apache Spark 3.3.0+ (optional, included in dependencies)
+- Apache Spark 3.3.3+ (optional, included in dependencies)
 - Python 3.7+ (for Python version)
-- PySpark (for Python version): `pip install pyspark`
+- PySpark 3.3.3+ (for Python version): `pip install pyspark>=3.3.3`
 
 ## 🏗️ Project Structure
 
