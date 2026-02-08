@@ -66,7 +66,7 @@ class DataProcessingApp:
         if columns:
             return df.select(
                 count("*").alias("total_records"),
-                countDistinct(columns[0]).alias(f"distinct_{columns[0]}")
+                count_distinct(columns[0]).alias(f"distinct_{columns[0]}")
             )
         else:
             return df.select(count("*").alias("total_records"))
