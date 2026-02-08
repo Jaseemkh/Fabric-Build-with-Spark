@@ -6,10 +6,16 @@ on:
   pull_request:
     branches: [ main, develop ]
 
+permissions:
+  contents: read
+
 jobs:
   build-scala:
     name: Build Scala Application
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
     
     steps:
     - uses: actions/checkout@v3
@@ -37,6 +43,10 @@ jobs:
   test-python:
     name: Test Python Application
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+    
     strategy:
       matrix:
         python-version: ['3.8', '3.9', '3.10']
@@ -71,6 +81,9 @@ jobs:
   validate-structure:
     name: Validate Project Structure
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
     
     steps:
     - uses: actions/checkout@v3
