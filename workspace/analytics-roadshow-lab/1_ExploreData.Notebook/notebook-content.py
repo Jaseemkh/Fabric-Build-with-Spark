@@ -178,7 +178,7 @@ display(df)
 # 
 # > ℹ️ **Tip:** Complex data type columns (Struct, Map, Array, etc.) can be drilled into by clicking on a cell value and then clicking the caret symbol. 
 # 
-# ![Explore Struct](https://github.com/microsoft/fabric-analytics-roadshow-lab/blob/initial-version-prep/assets/images/spark/explore-struct.gif?raw=true)
+# ![Explore Struct](https://github.com/Jaseemkh/Fabric-Build-with-Spark/blob/working-br/assets/images/spark/explore-struct.gif?raw=true)
 
 # CELL ********************
 
